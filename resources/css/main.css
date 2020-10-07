@@ -1,0 +1,10 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+
+.rounded-xl {
+    border-radius: 20px;
+}
