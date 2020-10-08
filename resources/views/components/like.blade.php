@@ -1,5 +1,5 @@
 <div class="flex">
-    <div class="flex items-center mr-4 {{ $tweet->isLikedBy(auth()->user()) ? 'text-blue-500' : 'text-gray-500' }}">
+    <div class="flex items-center mr-4 {{ $tweet->isLikedBy(auth()->user(), true) ? 'text-blue-500' : 'text-gray-500' }}">
         <form action="/tweet/{{ $tweet->id }}/like" method="POST">
             @csrf
             <button type="submit">
@@ -17,7 +17,7 @@
     
     </div>
 
-    <div class="flex items-center {{ $tweet->isDislikedBy(auth()->user()) ? 'text-blue-500' : 'text-gray-500' }}">
+    <div class="flex items-center {{ $tweet->isLikedBy(auth()->user(), false) ? 'text-blue-500' : 'text-gray-500' }}">
         <form action="/tweet/{{ $tweet->id }}/like" method="POST">
             @csrf
             @method('DELETE')

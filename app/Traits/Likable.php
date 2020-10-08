@@ -23,23 +23,24 @@ trait Likable
     }
 
     public function like($liked = true) {
-        $this->likes()->updateOrCreate([
-            'user_id' => auth()->id()
-        ],
-        [
-            'liked' => $liked
-        ]);
+
+        if ($this->isLikedBy(auth()->user(), $liked)) {
+            $this->likes()->where(['tweet_id'=> $this->id, 'user_id' => auth()->id()])->delete();
+        } else {
+            $this->likes()->updateOrCreate([
+                'user_id' => auth()->id()
+            ],
+            [
+                'liked' => $liked
+            ]);
+        }
     }
 
     public function dislike() {
         $this->like(false);
     }
 
-    public function isLikedBy(User $user) {
-        return (bool) $user->likes->where('tweet_id', $this->id)->where('liked', true)->count();
-    }
-
-    public function isDislikedBy(User $user) {
-        return (bool) $user->likes->where('tweet_id', $this->id)->where('liked', false)->count();
+    public function isLikedBy(User $user, $liked = true) {
+        return (bool) $user->likes->where('tweet_id', $this->id)->where('liked', $liked)->count();
     }
 }
