@@ -6,7 +6,13 @@
     </div>
     <div>
         <h5 class="font-bold mb-4"><a href="{{ $tweet->user->profileLink() }}">{{ $tweet->user->name }}</a></h5>
-        <p class="text-sm mb-3">{{ $tweet->body }}</p>
+        <div class="flex justify-between">
+            <p class="text-sm mb-3 flex-1">{{ $tweet->body }}</p>
+            
+            @if ($tweet->hasImage())
+                <img src="{{ $tweet->getImagePath() }}" alt="{{ $tweet->body }}" class="rounded-lg w-1/6" />
+            @endif
+        </div>
         @component('components/like', ['tweet' => $tweet])@endcomponent
     </div>
 </div>
