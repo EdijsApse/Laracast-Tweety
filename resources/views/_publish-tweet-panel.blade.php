@@ -5,7 +5,7 @@
         <hr class="mb-4">
         <footer class="flex justify-between items-center">
 
-            <img src="{{ auth()->user()->avatar }}" width="50" height="50" class="rounded-full mr-2" alt="Your avatar" />
+            <img src="{{ auth()->user()->getAvatarPath() }}" width="50" height="50" class="rounded-full mr-2" alt="Your avatar" />
 
             <button class="bg-blue-500 hover:bg-blue-600 rounded-full shadow py-2 px-10 text-sm text-white" type="submit">Publish</button>
 

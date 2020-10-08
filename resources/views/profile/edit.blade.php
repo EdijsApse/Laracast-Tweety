@@ -26,10 +26,27 @@
                 
                 <div class="flex items-center">
                     <input class="border border-gray-400 p-2 w-full" type="file" name="avatar" id="avatar" />
-                    <img src="{{ $user->avatar }}" alt="{{ $user->username }}" width="50" class="rounded-full ml-6" />
+                    @if($user->hasAvatar())
+                        <img src="{{ $user->getAvatarPath() }}" alt="{{ $user->username }}" width="50" class="rounded-full ml-6" />
+                    @endif
                 </div>
 
                 @error('avatar')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                @enderror
+        </div>
+
+        <div class="mb-6">
+                <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="banner">Banner</label>
+                
+                <div class="flex items-center">
+                    <input class="border border-gray-400 p-2 w-full" type="file" name="banner" id="banner" />
+                    @if($user->hasBanner())
+                        <img src="{{ $user->getBannerPath() }}" alt="{{ $user->username }}" width="50" class="rounded-lg ml-6" />
+                    @endif
+                </div>
+
+                @error('banner')
                     <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                 @enderror
         </div>
@@ -39,6 +56,15 @@
             <input class="border border-gray-400 p-2 w-full" type="email" name="email" value="{{ $user->email }}" id="email" required />
 
             @error('email')
+                <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="mb-6">
+            <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="description">Description</label>
+            <textarea class="border border-gray-400 p-2 w-full" name="description">{{ $user->description }}</textarea>
+
+            @error('description')
                 <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
             @enderror
         </div>

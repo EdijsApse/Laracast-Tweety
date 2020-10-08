@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 use App\Traits\Followable;
 
@@ -18,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'avatar'
+        'name', 'email', 'password', 'username', 'avatar', 'banner', 'description'
     ];
 
     /**
@@ -55,8 +57,36 @@ class User extends Authenticatable
         return $this->hasMany(Tweet::class);
     }
 
-    public function getAvatarAttribute($value) {
-        return asset($value ? 'storage/'.$value : 'storage/avatars/_default.jpg');
+    public function getBannerPath() {
+        return asset($this->hasBanner() ? 'storage/'.$this->banner : 'storage/banners/_default_banner.jpg');
+    }
+
+    public function getAvatarPath() {
+        return asset($this->hasAvatar() ? 'storage/'.$this->avatar : 'storage/avatars/_default.jpg');
+    }
+
+    public function hasAvatar() {
+        return (bool) $this->avatar;
+    }
+
+    public function hasBanner() {
+        return (bool) $this->banner;
+    }
+
+    public function storeAvatar(UploadedFile $avatar) {
+        if ($this->hasAvatar()) {
+            Storage::delete($this->avatar);
+        }
+
+        return $avatar->store('avatars');
+    }
+
+    public function storeBanner(UploadedFile $banner) {
+        if ($this->hasBanner()) {
+            Storage::delete($this->banner);
+        }
+
+        return $banner->store('banners');
     }
 
     public function getRouteKeyName() {

@@ -3,10 +3,10 @@
         <header class="mb-6">
             <div class="border rounded-xl mb-2 relative flex justify-center">
                 <div class="border rounded-xl" style="max-height:200px; overflow:hidden">
-                    <img src="/images/profile_banner.jpg" alt="Profile Banners" />
+                    <img src="{{ $user->getBannerPath() }}" alt="Profile Banners" />
                 </div>
 
-                <img src="{{ $user->avatar }}" width="130" style="bottom: -65px" class="rounded-full absolute mr-2" alt="User" />
+                <img src="{{ $user->getAvatarPath() }}" width="130" style="bottom: -65px" class="rounded-full absolute mr-2" alt="User" />
             </div>
 
             <div class="flex justify-between items-center mb-6">
@@ -27,13 +27,7 @@
                 </div>
             </div>
 
-            <p class="text-sm">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with de
-            </p>
+            <p class="text-sm">{{ $user->description }}</p>
         
         </header>
 
