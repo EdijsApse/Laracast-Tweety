@@ -1,10 +1,10 @@
 <template>
     <transition name="fade">
-        <div v-if="message" :class="['alert', containerclass]">
+        <div v-if="visible" :class="['alert', containerclass]">
             <div class="relative w-full">
                 <h3>{{ heading }}</h3>
                 <p>{{ message }}</p>
-                <i class="fas fa-times" @click="message = ''"></i>
+                <i class="fas fa-times" @click="visible = false"></i>
             </div>
         </div>
     </transition>
@@ -12,7 +12,17 @@
 
 <script>
 export default {
-    props: ['message', 'heading', 'containerclass']
+    data() {
+        return {
+            visible: false
+        }
+    },
+    props: ['message', 'heading', 'containerclass'],
+    created() {
+        setTimeout(() => {
+            this.visible = true;
+        }, 500);
+    },
 }
 </script>
 

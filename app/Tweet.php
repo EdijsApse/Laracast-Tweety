@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use App\Traits\Likable;
+use Illuminate\Support\Facades\Storage;
 
 class Tweet extends Model
 {
@@ -27,5 +28,14 @@ class Tweet extends Model
 
     public function getImagePath() {
         return asset('storage/'.$this->image);
+    }
+
+    public function remove() {
+
+        if ($this->image) {
+            Storage::delete($this->image);
+        }
+
+        $this->delete();
     }
 }

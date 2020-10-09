@@ -108,7 +108,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['message', 'heading', 'containerclass']
+  data: function data() {
+    return {
+      visible: false
+    };
+  },
+  props: ['message', 'heading', 'containerclass'],
+  created: function created() {
+    var _this = this;
+
+    setTimeout(function () {
+      _this.visible = true;
+    }, 500);
+  }
 });
 
 /***/ }),
@@ -1242,7 +1254,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: "fade" } }, [
-    _vm.message
+    _vm.visible
       ? _c("div", { class: ["alert", _vm.containerclass] }, [
           _c("div", { staticClass: "relative w-full" }, [
             _c("h3", [_vm._v(_vm._s(_vm.heading))]),
@@ -1253,7 +1265,7 @@ var render = function() {
               staticClass: "fas fa-times",
               on: {
                 click: function($event) {
-                  _vm.message = ""
+                  _vm.visible = false
                 }
               }
             })

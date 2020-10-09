@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function() {
     Route::post('/tweets', 'TweetController@store');
+    Route::delete('/tweets/{tweet}', 'TweetController@destroy')->middleware('can:delete,tweet');
     Route::get('/tweets', 'TweetController@index')->name('home');
     Route::post('/profile/{user}/follow', 'FollowsController@store');
     Route::get('/profile/{user}/edit', 'ProfileController@edit')->middleware('can:edit,user');

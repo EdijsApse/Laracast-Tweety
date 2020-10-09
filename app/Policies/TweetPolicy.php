@@ -3,14 +3,14 @@
 namespace App\Policies;
 
 use App\User;
+use App\Tweet;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class TweetPolicy
 {
     use HandlesAuthorization;
 
-    public function edit(User $currentUser, User $user) {
-        return $currentUser->is($user);
+    public function delete(User $user, Tweet $tweet) {
+        return $tweet->user_id === $user->id;
     }
-    
 }
