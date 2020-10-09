@@ -9,11 +9,11 @@ class TweetLikeController extends Controller
 {
     public function store(Tweet $tweet) {
         $tweet->like();
-        return back();
+        return back()->with('success', 'Tweets like status changed!');
     }
 
     public function destroy(Tweet $tweet) {
         $tweet->dislike();
-        return back();
+        return back()->with('success', 'Tweets like status changed!');;
     }
 }

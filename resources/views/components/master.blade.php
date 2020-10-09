@@ -9,18 +9,18 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    
+    <script src="https://unpkg.com/turbolinks"></script>
+    <script src="https://kit.fontawesome.com/04d31d0667.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="relative">
         <section class="px-8 py-4 mb-6">
             <header class="container mx-auto">
                 <h1>
@@ -33,6 +33,6 @@
 
         {{ $slot }}
     </div>
-    <script src="https://unpkg.com/turbolinks"
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

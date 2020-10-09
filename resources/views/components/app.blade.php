@@ -16,4 +16,5 @@
             </div>
         </main>
     </section>
+    @component('components/messages')@endcomponent
 @endcomponent

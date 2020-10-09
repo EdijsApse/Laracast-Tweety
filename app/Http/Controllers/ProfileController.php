@@ -72,6 +72,6 @@ class ProfileController extends Controller
 
         $user->update($attributes);
 
-        return redirect($user->profileLink());
+        return redirect($user->profileLink())->with('success', 'Profile updated!');
     }
 }

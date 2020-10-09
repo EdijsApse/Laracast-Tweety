@@ -31,6 +31,6 @@ class TweetController extends Controller
 
         $tweet->create($attributes);
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Tweet created!');
     }
 }
